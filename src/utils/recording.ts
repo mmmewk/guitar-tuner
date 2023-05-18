@@ -134,7 +134,7 @@ export const useAnalyser = (options: useAnalyserOptions = {}) => {
       clearInterval(interval);
     }
 
-  }, [analyser, audioContext, frameRate, minFrequency, maxFrequency]);
+  }, [analyser, audioContext, frameRate, minIntensity, minFrequency, maxFrequency]);
 
   return {
     timeData,
