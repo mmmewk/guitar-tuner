@@ -2,9 +2,9 @@ import ReactSelect from 'react-select';
 
 interface Props {
   label: string,
-  value: number,
-  setValue: (value: number) => void,
-  options: number[],
+  value: any,
+  setValue: (value: any) => void,
+  options: any[],
 }
 
 const Select : React.FC<Props> = ({ label, value, setValue, options }) => {

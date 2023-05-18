@@ -16,6 +16,7 @@ const Frequency : React.FC = () => {
     // Higher sample rate means less time required
     sampleRate: 48000,
     frameRate: 30,
+    minIntensity: 0.1,
     minFrequency: pitchToFrequency('C2'),
     maxFrequency: pitchToFrequency('G6'),
   });
@@ -53,7 +54,7 @@ const Frequency : React.FC = () => {
 
     const point = payload[0].payload;
     return (
-      <div className="border-2 border-indigo-400 p-2 background-white">
+      <div className="border-2 border-indigo-400 p-2 bg-white">
         <p>
           <b>{xlabel}:{' '}</b>
           <span>{formatter(point.frequency)}</span>

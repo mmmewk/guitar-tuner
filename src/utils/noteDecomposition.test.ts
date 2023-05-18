@@ -3,6 +3,25 @@ import analysePitches from "./noteDecomposition";
 import { FrequencyDataPoint } from "./recording";
 
 describe('analysePitches', () => {
+  test('Stores the correct note name', () => {
+    const data : FrequencyDataPoint[] = [
+      { frequency: stringToFrequency('A4-10'), intensity: 120 },
+      { frequency: stringToFrequency('A4'), intensity: 100 },
+      { frequency: stringToFrequency('A4+10'), intensity: 80 },
+
+      { frequency: stringToFrequency('A#4'), intensity: 50 },
+
+      { frequency: stringToFrequency('B4+10'), intensity: 80 },
+    ]
+
+    const analysis = analysePitches(data);
+
+    expect(Object.keys(analysis)).toEqual(['A4', 'A#4', 'B4']);
+
+    expect(analysis.A4.pitch).toEqual('A4');
+    expect(analysis.B4.pitch).toEqual('B4');
+  });
+
   test('Finds the highest point for each pitch', () => {
     const data : FrequencyDataPoint[] = [
       { frequency: stringToFrequency('A4-30'), intensity: 80 },
@@ -26,7 +45,7 @@ describe('analysePitches', () => {
     expect(analysis['A#4'].accuracy).toBeCloseTo(0);
   });
 
-  test('Computes an integral with the same value for notes of equal intensity', () => {
+  test('Computes an intensity with the same value for notes of equal intensity', () => {
     const data : FrequencyDataPoint[] = [
       { frequency: stringToFrequency('A4-30'), intensity: 80 },
       { frequency: stringToFrequency('A4-10'), intensity: 120 },

@@ -8,7 +8,7 @@ import React from 'react';
 import RawSound from './Components/RawSound';
 import Navbar from './Components/Navbar';
 import Frequency from './Components/Frequency';
-import Peaks from './Components/Peaks';
+import Notes from './Components/Notes';
 
 const App : React.FC = () => {
   return (
@@ -18,7 +18,7 @@ const App : React.FC = () => {
         <Route path='/' />
         <Route path='/raw-sound' element={<RawSound />} />
         <Route path='/frequency' element={<Frequency />} />
-        <Route path='/peaks' element={<Peaks />} />
+        <Route path='/notes' element={<Notes />} />
       </Routes>
     </Router>
   );

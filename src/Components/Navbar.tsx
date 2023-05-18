@@ -10,8 +10,8 @@ const Navbar : React.FC = () => {
         <Link to="/frequency" className='mx-2 whitespace-nowrap'>
           <li className="text-gray-50">Frequency</li>
         </Link>
-        <Link to="/peaks" className='mx-2 whitespace-nowrap'>
-          <li className="text-gray-50">Peaks</li>
+        <Link to="/notes" className='mx-2 whitespace-nowrap'>
+          <li className="text-gray-50">Notes</li>
         </Link>
       </ul>
     </nav>

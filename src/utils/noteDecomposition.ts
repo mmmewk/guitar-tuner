@@ -1,9 +1,12 @@
 import { frequencyToPitch, pitchToString } from "./musicTheory";
 import { FrequencyDataPoint } from "./recording";
 
-type pitchAnalysis = {
+export type PitchAnalysis = {
   [pitch: string]: {
-    // Integral of all points between note +-50 cents
+    // The string form of the pitch
+    pitch: string;
+    // Integral of all intensities between note+-50 cents.
+    // Subtracted off the mean value in the bounds to reduce noise.
     integral: number,
     // Accuracy in cents of the highest peak for this note
     accuracy: number,
@@ -13,22 +16,32 @@ type pitchAnalysis = {
 }
 
 const analysePitches = (data: FrequencyDataPoint[]) => {
-  const analysis : pitchAnalysis = {};
+  const minValueForOctave : { [key: number]: number } = {};
+  const analysis : PitchAnalysis = {};
+
+  data.forEach((point) => {
+    const pitch = frequencyToPitch(point.frequency);
+    minValueForOctave[pitch.octave] ||= Infinity;
+    minValueForOctave[pitch.octave] = Math.min(minValueForOctave[pitch.octave], point.intensity);
+  });
 
   data.forEach((point, index) => {
     const nextPoint = data[index + 1];
     const pitch = frequencyToPitch(point.frequency);
-    const noteName = pitchToString(pitch);
-    analysis[noteName] ||= { integral: 0, accuracy: 0, max: 0 };
+    const key = pitchToString(pitch);
+    analysis[key] ||= { pitch: key, integral: 0, accuracy: 0, max: -Infinity };
+
+    if (point.intensity > analysis[key].max) {
+      analysis[key].max = point.intensity;
+      analysis[key].accuracy = pitch.cents;
+    }
+
     if (nextPoint) {
       // Use log of frequency as X so that each note has a consistent X span
       const dx = Math.log2(nextPoint.frequency) - Math.log2(point.frequency);
-      analysis[noteName].integral += point.intensity * dx;
-    }
-
-    if (point.intensity > analysis[noteName].max) {
-      analysis[noteName].max = point.intensity;
-      analysis[noteName].accuracy = pitch.cents;
+      // 
+      const y = point.intensity - minValueForOctave[pitch.octave];
+      analysis[key].integral += y * dx;
     }
   });
 
