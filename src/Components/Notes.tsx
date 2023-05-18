@@ -30,7 +30,6 @@ const Notes : React.FC = () => {
     // Higher sample rate means less time required
     sampleRate: 48000,
     frameRate: 30,
-    minIntensity: 0.2,
     minFrequency: pitchToFrequency('C2'),
     maxFrequency: pitchToFrequency('G6'),
   });
@@ -76,7 +75,7 @@ const Notes : React.FC = () => {
         </YAxis>
         <Tooltip content={renderTooltip} />
         <Bar dataKey="integral" fill="#82ca9d" isAnimationActive={false}>
-          {pitchData.map((entry, index) => {
+          {pitchData.map((entry) => {
             return <Cell key={entry.pitch} fill={highlightedPitches.includes(entry.pitch) ? "indigo" : "#82ca9d"} />
           })}
         </Bar>

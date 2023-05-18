@@ -40,7 +40,7 @@ const analysePitches = (data: FrequencyDataPoint[]) => {
       // Use log of frequency as X so that each note has a consistent X span
       const dx = Math.log2(nextPoint.frequency) - Math.log2(point.frequency);
       // 
-      const y = point.intensity - minValueForOctave[pitch.octave];
+      const y = point.intensity;
       analysis[key].integral += y * dx;
     }
   });
