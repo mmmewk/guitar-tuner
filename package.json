@@ -7,20 +7,32 @@
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
     "@types/jest": "^27.0.1",
+    "@types/lodash": "^4.14.194",
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "classnames": "^2.3.2",
+    "fft.js": "^4.0.4",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.11.1",
     "react-scripts": "5.0.1",
+    "react-select": "^5.7.3",
+    "recharts": "^2.6.2",
+    "sass": "^1.62.1",
+    "slayer": "^1.0.1",
     "typescript": "^4.4.2",
+    "util": "^0.12.5",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "react-scripts build",
+    "deploy": "aws s3 sync ./build s3://www.guitar-tuner.mekoppe.com --delete && aws cloudfront create-invalidation --distribution-id EI4A1VRRBC4US --paths '/*'"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +51,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "buffer": "^6.0.3",
+    "jest": "^29.5.0",
+    "postcss": "^8.4.23",
+    "tailwindcss": "^3.3.2"
   }
 }

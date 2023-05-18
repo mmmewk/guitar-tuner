@@ -1,0 +1,37 @@
+@mixin ButtonBase {
+  padding: 1px 5px;
+  border-radius: 20px;
+  border: 1px solid indigo;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+@mixin ButtonActive {
+  background-color: indigo;
+  color: white;
+  cursor: default;
+}
+
+.ButtonLeft {
+  @include ButtonBase();
+
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-right-width: 0px;
+
+  &.Active {
+    @include ButtonActive();
+  }
+}
+
+.ButtonRight {
+  @include ButtonBase();
+
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+
+  &.Active {
+    @include ButtonActive();
+  }
+}
