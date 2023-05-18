@@ -40,7 +40,7 @@ export const stringToPitch = (str: string) => {
 
   if (!noteMatch || !octaveMatch) throw Error(`Invalid Notation: ${str}`);
 
-  return { note: noteMatch[0], octave: parseInt(octaveMatch[0]), cents };
+  return { note: noteMatch[0] as Note, octave: parseInt(octaveMatch[0]), cents };
 }
 
 type PitchToStringOptions = {
@@ -110,4 +110,8 @@ export const frequencyToPitch = (frequency: number) => {
 
 export const frequencyToString = (frequency: number) => {
   return pitchToString(frequencyToPitch(frequency));
+}
+
+export const stringToFrequency = (str: string) => {
+  return pitchToFrequency(stringToPitch(str));
 }
