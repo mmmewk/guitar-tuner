@@ -23,6 +23,10 @@ jobs:
         uses: borales/actions-yarn@v3.0.0
         with:
           cmd: build
+      - name: Yarn Test
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: test
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
