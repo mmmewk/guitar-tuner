@@ -7,8 +7,8 @@ export interface SettingsState {
 };
 
 const initialState: SettingsState = {
-  bufferSize: 8192,
-  sampleRate: 6000,
+  bufferSize: 16382,
+  sampleRate: 24000,
   frameRate: 30,
 }
 
