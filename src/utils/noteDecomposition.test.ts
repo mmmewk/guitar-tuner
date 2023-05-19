@@ -38,8 +38,8 @@ describe('analysePitches', () => {
 
     expect(Object.keys(analysis)).toEqual(['A4', 'A#4']);
 
-    expect(analysis.A4.max).toEqual(120);
-    expect(analysis['A#4'].max).toEqual(80);
+    expect(analysis.A4.max.intensity).toEqual(120);
+    expect(analysis['A#4'].max.intensity).toEqual(80);
 
     expect(analysis.A4.accuracy).toBeCloseTo(-10);
     expect(analysis['A#4'].accuracy).toBeCloseTo(0);

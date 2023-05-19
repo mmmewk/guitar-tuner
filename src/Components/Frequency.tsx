@@ -4,19 +4,21 @@ import { frequencyToString, pitchToFrequency } from "../utils/musicTheory";
 import useWindowSize from "../utils/windowSize";
 import { useState } from "react";
 import Toggle from './Toggle';
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 const Frequency : React.FC = () => {
   const { width, height } = useWindowSize();
   const [scale, setScale] = useState<'linear' | 'log'>('linear');
   const [format, setFormat] = useState<'hz' | 'note'>('hz');
+  const { bufferSize, sampleRate, frameRate } = useSelector((state: RootState) => state.settings);
 
   const { frequencyData } = useAnalyser({
     // More data = more precision
-    bufferSize: 8192,
+    bufferSize,
     // Higher sample rate means less time required
-    sampleRate: 48000,
-    frameRate: 30,
-    minIntensity: 0.1,
+    sampleRate,
+    frameRate,
     minFrequency: pitchToFrequency('C2'),
     maxFrequency: pitchToFrequency('G6'),
   });
@@ -53,11 +55,18 @@ const Frequency : React.FC = () => {
     if (!payload || !active) return null;
 
     const point = payload[0].payload;
+
+    const frequency = scale === 'linear' ? point.frequency : Math.pow(2, point.frequency);
+
     return (
       <div className="border-2 border-indigo-400 p-2 bg-white">
         <p>
-          <b>{xlabel}:{' '}</b>
-          <span>{formatter(point.frequency)}</span>
+          <b>Note:{' '}</b>
+          <span>{frequencyToString(frequency)}</span>
+        </p>
+        <p>
+          <b>Frequency (hz):{' '}</b>
+          <span>{Math.round(point.frequency)}</span>
         </p>
         <p>
           <b>Intensity:{' '}</b>

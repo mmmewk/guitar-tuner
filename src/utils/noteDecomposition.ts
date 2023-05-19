@@ -10,8 +10,8 @@ export type PitchAnalysis = {
     integral: number,
     // Accuracy in cents of the highest peak for this note
     accuracy: number,
-    // Max intensity of the highest peak for this note
-    max: number,
+    // Point with max intensity
+    max: FrequencyDataPoint,
   }
 }
 
@@ -29,16 +29,16 @@ const analysePitches = (data: FrequencyDataPoint[]) => {
     const nextPoint = data[index + 1];
     const pitch = frequencyToPitch(point.frequency);
     const key = pitchToString(pitch);
-    analysis[key] ||= { pitch: key, integral: 0, accuracy: 0, max: -Infinity };
+    analysis[key] ||= { pitch: key, integral: 0, accuracy: 0, max: { frequency: -Infinity, intensity: -Infinity } };
 
-    if (point.intensity > analysis[key].max) {
-      analysis[key].max = point.intensity;
+    if (point.intensity > analysis[key].max.intensity) {
+      analysis[key].max = point;
       analysis[key].accuracy = pitch.cents;
     }
 
     if (nextPoint) {
       // Use log of frequency as X so that each note has a consistent X span
-      const dx = Math.log2(nextPoint.frequency) - Math.log2(point.frequency);
+      const dx = nextPoint.frequency - point.frequency;
       // 
       const y = point.intensity;
       analysis[key].integral += y * dx;
