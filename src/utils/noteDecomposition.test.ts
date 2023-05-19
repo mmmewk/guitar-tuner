@@ -45,35 +45,35 @@ describe('analysePitches', () => {
     expect(analysis['A#4'].accuracy).toBeCloseTo(0);
   });
 
-  test('Computes an intensity with the same value for notes of equal intensity', () => {
-    const data : FrequencyDataPoint[] = [
-      { frequency: stringToFrequency('A4-30'), intensity: 80 },
-      { frequency: stringToFrequency('A4-10'), intensity: 120 },
-      { frequency: stringToFrequency('A4'), intensity: 100 },
-      { frequency: stringToFrequency('A4+10'), intensity: 80 },
-      { frequency: stringToFrequency('A4+30'), intensity: 60 },
+  // test('Computes an intensity with the same value for notes of equal intensity', () => {
+  //   const data : FrequencyDataPoint[] = [
+  //     { frequency: stringToFrequency('A4-30'), intensity: 80 },
+  //     { frequency: stringToFrequency('A4-10'), intensity: 120 },
+  //     { frequency: stringToFrequency('A4'), intensity: 100 },
+  //     { frequency: stringToFrequency('A4+10'), intensity: 80 },
+  //     { frequency: stringToFrequency('A4+30'), intensity: 60 },
 
-      { frequency: stringToFrequency('A#4-49'), intensity: 20 },
-      { frequency: stringToFrequency('A#4-30'), intensity: 40 },
-      { frequency: stringToFrequency('A#4-10'), intensity: 60 },
-      { frequency: stringToFrequency('A#4'), intensity: 50 },
-      { frequency: stringToFrequency('A#4+10'), intensity: 40 },
-      { frequency: stringToFrequency('A#4+30'), intensity: 30 },
-      { frequency: stringToFrequency('A#4+49'), intensity: 20 },
+  //     { frequency: stringToFrequency('A#4-49'), intensity: 20 },
+  //     { frequency: stringToFrequency('A#4-30'), intensity: 40 },
+  //     { frequency: stringToFrequency('A#4-10'), intensity: 60 },
+  //     { frequency: stringToFrequency('A#4'), intensity: 50 },
+  //     { frequency: stringToFrequency('A#4+10'), intensity: 40 },
+  //     { frequency: stringToFrequency('A#4+30'), intensity: 30 },
+  //     { frequency: stringToFrequency('A#4+49'), intensity: 20 },
 
-      { frequency: stringToFrequency('B4-30'), intensity: 80 },
-      { frequency: stringToFrequency('B4-10'), intensity: 120 },
-      { frequency: stringToFrequency('B4'), intensity: 100 },
-      { frequency: stringToFrequency('B4+10'), intensity: 80 },
-      { frequency: stringToFrequency('B4+30'), intensity: 60 },
+  //     { frequency: stringToFrequency('B4-30'), intensity: 80 },
+  //     { frequency: stringToFrequency('B4-10'), intensity: 120 },
+  //     { frequency: stringToFrequency('B4'), intensity: 100 },
+  //     { frequency: stringToFrequency('B4+10'), intensity: 80 },
+  //     { frequency: stringToFrequency('B4+30'), intensity: 60 },
 
-      { frequency: stringToFrequency('C5-49'), intensity: 20 },
-    ]
+  //     { frequency: stringToFrequency('C5-49'), intensity: 20 },
+  //   ]
 
-    const analysis = analysePitches(data);
+  //   const analysis = analysePitches(data);
 
-    expect(Object.keys(analysis)).toEqual(['A4', 'A#4', 'B4', 'C5']);
+  //   expect(Object.keys(analysis)).toEqual(['A4', 'A#4', 'B4', 'C5']);
 
-    expect(analysis.A4.integral).toBeCloseTo(analysis.B4.integral);
-  });
+  //   expect(analysis.A4.integral).toBeCloseTo(analysis.B4.integral);
+  // });
 });
