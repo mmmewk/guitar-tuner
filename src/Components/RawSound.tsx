@@ -1,7 +1,6 @@
 import { LineChart, XAxis, YAxis, CartesianGrid, Line, Label } from "recharts";
 import { useAnalyser } from "../utils/recording";
 import useWindowSize from "../utils/windowSize";
-import { useState } from "react";
 import Select from "./Select";
 import { useDispatch, useSelector } from "react-redux";
 import { setBufferSize, setSampleRate, setFrameRate } from "../redux/slices/settingsSlice";
